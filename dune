@@ -1,0 +1,12 @@
+(executable
+ (name main)
+ (modules main)
+ (libraries ocamlJson))
+
+(alias
+ (name DEFAULT)
+ (deps main.bc))
+
+(install
+ (section bin)
+ (files (main.bc as main)))

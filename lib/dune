@@ -1,0 +1,4 @@
+(library
+ (name ocamlJson)
+ (public_name ocamlJson)
+ (synopsis "JSON parsing and printing"))

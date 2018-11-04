@@ -1,0 +1,12 @@
+(tests
+ (names
+  nullTest
+  boolTest
+  intTest
+  floatTest
+  stringTest
+  arrayTest
+  objectTest)
+ (libraries
+  oUnit
+  ocamlJson))

@@ -1,0 +1,13 @@
+opam-version: "1.2"
+maintainer: "wgtdkp@gmail.com"
+authors: "Knagping Dong"
+homepage: "https://github.com/wgtdkp/ocaml-json"
+bug-reports: "https://github.com/wgtdkp/ocaml-json/issues"
+dev-repo: "https://github.com/wgtdkp/ocaml-json"
+available: [ocaml-version >= "4.02.3"]
+build: []
+build-test: []
+
+depends: [
+  "dune" {build}
+]

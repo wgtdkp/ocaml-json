@@ -1,0 +1,11 @@
+{
+    "name": "ocaml-json",
+    "age": 35,
+    "weight": 128.5,
+    "height": 173.2,
+    "married": true,
+    "has_children": false,
+    "schools": [],
+    "friends": null,
+    "parents": ["sam", "apollonia"]
+}
