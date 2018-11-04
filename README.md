@@ -1,3 +1,3 @@
 # ocaml-json
 
-OCaml implementation of a json parser
+OCaml implementation of a json parser, for learning OCaml.
