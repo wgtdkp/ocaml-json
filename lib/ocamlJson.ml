@@ -50,7 +50,7 @@ let rec parse_value s =
     | '[' -> parse_array s []
     | '\"' -> Buffer.create 4 |> parse_string s
     | '0' .. '9' | '-' ->
-      Buffer.create 4 |> fun buf -> Buffer.add_char buf c; parse_number s buf
+        Buffer.create 4 |> fun buf -> Buffer.add_char buf c; parse_number s buf
     | 't' | 'f' -> c = 't' |> parse_bool s
     | 'n' -> parse_null s
     | _ -> raise (Error "unexpected character")
@@ -98,8 +98,8 @@ and parse_string s buf =
             | 't' -> Buffer.add_char buf '\t'
             | _ -> raise (Error "unexpected escpaed label")
           in parse_string s buf)
-    | '\b' | '\n' | '\r' | '\t'
-      -> raise (Error "unexpected control label")
+    | '\b' | '\n' | '\r' | '\t' ->
+        raise (Error "unexpected control label")
     | '\x00' -> raise (Error "premature end of file")
     | _ -> (Buffer.add_char buf c; parse_string s buf)
 
@@ -118,17 +118,17 @@ and parse_number s buf =
   let next_s, c = step s in
   match c with
     | '0'..'9' | '.' | 'e' | 'E' | '-' | '+' ->
-      (Buffer.add_char buf c; parse_number next_s buf)
+        (Buffer.add_char buf c; parse_number next_s buf)
     | _ ->
-      try
-        let str = Buffer.contents buf in
-        if String.contains str '.' ||
-          String.contains str 'e' ||
-          String.contains str 'E' then
-          s, Float (str |> float_of_string)
-        else
-          s, Int (str |> int_of_string)
-      with Failure msg -> raise (Error msg)
+        try
+          let str = Buffer.contents buf in
+          if String.contains str '.' ||
+            String.contains str 'e' ||
+            String.contains str 'E' then
+            s, Float (str |> float_of_string)
+          else
+            s, Int (str |> int_of_string)
+        with Failure msg -> raise (Error msg)
 
 and parse_bool s b =
   let prefix = if b then "rue" else "alse" in
