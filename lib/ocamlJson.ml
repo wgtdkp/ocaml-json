@@ -165,7 +165,7 @@ let from_channel ic =
 let from_file fname =
   let ic = open_in fname in
   from_channel ic
-  
+
 let rec pretty_print = function
   | Null -> "null"
   | Bool b -> string_of_bool b
