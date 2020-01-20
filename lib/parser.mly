@@ -1,3 +1,7 @@
+%{
+  open JsonType
+%}
+
 %token <int> INT
 %token <float> FLOAT
 %token <string> ID
@@ -13,7 +17,7 @@
 %token COMMA
 %token EOF
 
-%start <OcamlJson.json option> prog
+%start <JsonType.json option> prog
 
 %%
 
@@ -24,31 +28,31 @@ prog:
 
 value:
   | LEFT_BRACE; obj = object_fields; RIGHT_BRACE
-    { `Object obj }
+    { Object obj }
   | LEFT_BRACK; arr = array_values; RIGHT_BRACK
-    { `Array arr }
+    { Array arr }
   | s = STRING
-    { `String s }
+    { String s }
   | i = INT
-    { `Int i }
+    { Int i }
   | f = FLOAT
-    { `Float f }
+    { Float f }
   | TRUE
-    { `Bool true }
+    { Bool true }
   | FALSE
-    { `Bool false }
+    { Bool false }
   | NULL
-    { `Null }
+    { Null }
   ;
 
 object_fields:
-  | (* empty *) { [] }
-  | obj = rev_object_fields { List.rev obj }
+  obj = separated_list(COMMA, object_field) { obj }
   ;
 
-rev_object_fields:
-  | k = ID; COLON; v = value
-    { [(k, v)] }
-  | obj = rev_object_fields; COMMA; k = ID; COLON; v = value
-    { (k, v) :: obj }
+object_field:
+  k = ID; COLON; v = value { (k, v) }
+  ;
+
+array_values:
+  arr = separated_list(COMMA, value) { arr }
   ;

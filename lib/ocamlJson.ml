@@ -1,19 +1,12 @@
-type json =
-  | Null
-  | Bool of bool
-  | Int of int
-  | Float of float
-  | String of string
-  | Array of json list
-  | Object of (string * json) list
+open JsonType
+
+exception Error of string
 
 type state = {
   raw : string;
   cur : int;
   line : int;
 }
-
-exception Error of string
 
 let rec next s =
   if s.cur >= String.length s.raw then
